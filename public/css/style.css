@@ -23,6 +23,7 @@ span a{
     padding: 10px;
     border-radius: 10px;
     margin-bottom: 10px;
+    margin-top: 10px;
 }
 .btn-editar{
     display: flex;
@@ -31,10 +32,13 @@ span a{
     width: 180px;
     padding-top: 3px;
     margin: 0 auto;
-    color: #000;
+    color: #000000;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bolder;
+}
+.btn-editar:hover{
+    background-color: #2E9AFE; 
 }
 .game-img{
     width: 30px;
@@ -77,4 +81,12 @@ input[type=text]{
 }
 #search{
     margin-bottom: 20px;
+}
+.box-nivel{
+    margin-bottom: 15px; 
+    font-size: 16px; 
+    font-weight: 500;
+}
+.box-nivel select{
+    font-size: 17px;
 }

@@ -11,8 +11,9 @@
         <div id="res-pesquisa">
           
         </div>
-    </div>
 
+    </div>
+    
     <script>
         let searchBar   = document.getElementById("search-bar");
         let resPesquisa = document.getElementById("res-pesquisa");
@@ -24,10 +25,8 @@
                 fetch(`http://localhost:3000/feed/pesquisar/${searchBar.value}`).then( (res) => {
                     res.json().then((dados) => {
                         let str = '';
-                        // console.log(dados);
                     
                         dados.forEach( (res, index) => {
-                           console.log(res.nome);
                            str += `
                             <div class="box-jogo">
                                 <div style=" display: flex; align-items: center; justify-content: start;">
