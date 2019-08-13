@@ -40,7 +40,7 @@
           if(cmpnome.value == ""){
             alert(`Por favor. Digite o nome do Jogo (*_*)`);
           }else{
-            fetch(`http://localhost:3000/cadastrar/jogo`, {
+            fetch(`https://registrojogos.herokuapp.com/cadastrar/jogo`, {
               method: 'POST',
               headers: {
                 'Accept': 'application/json, text/plain, */*',
