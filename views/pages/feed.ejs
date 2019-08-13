@@ -4,22 +4,21 @@
 <body>
 
     <div class="conteudo">
-        <h1>Jogos</h1>
-        <% if(postsRec != "undefined") {%>
+        <h1>Lista de Jogos</h1>
+        <% if(postsRec.length > 0) {%>
             <% postsRec.forEach(function(dados, index) { %>
                 <div class="box-jogo">
                    <div style=" display: flex; align-items: center; justify-content: start;">
                         <img class="game-img" src="../../public/img/game.png" alt="Jogo logo">
                         <span style="margin-left:10px; font-size: 18px;"><%= dados.nome %></span>
                    </div>
-                    
+                    <small><%= moment(dados.criado_aos).format('lll') %></small>
                     <p style="margin: 6px 0px;">Dificuldade: <span><%= dados.dificuldade %></span> </p>
-                    <p><%= moment(dados.criado_aos).format('LLL') %></p>
-                    <a class="btn-editar" href="/feed/editar">Editar</a>
+                    <a class="btn-editar" href="/feed/editar/<%= dados._id %>">Editar</a>
                 </div>
             <% }); %>
         <% } else { %>  
-            <h3>Nehum Post encontrado Por favor, <a href="/">clique</a> para cadastrar </h3>
+            <h3>Nenhum post encontrado por favor clique, <a href="/">Aqui</a> para cadastrar</h3>
         <% } %>
     </div>
 

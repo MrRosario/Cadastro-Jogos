@@ -12,7 +12,7 @@
             <input type="text" name="nome" id="cmpnome" placeholder="Novo Jogo" >
             <br>
             <div style="margin-bottom: 15px; font-size: 16px; font-weight: 500;">
-              <span>Dificuldade do Jogo:</span>
+              <span>Nível de dificuldade:</span>
               <br>
                 <select name="dificuldade" style="font-size: 16px;" onChange="selectionarDificuldade(this);">
                   <option selected desabled hidden>Selecionar:</option>
@@ -21,10 +21,8 @@
                   <option value="Df">Difícil</option>
                 </select>
             </div>
-
             <input type="submit" value="Cadastar" name="cadastrar" id="btn-cadastrar" />
-        <form>
-
+          </form>
     </div>
 
     <script>
@@ -37,32 +35,32 @@
         }
 
         btn_cadastrar.addEventListener("click", (e) => {
-        e.preventDefault();
-      
-        if(cmpnome.value == ""  || camp_dificul === undefined){
-          alert("Por favor preencha os campos");
-        }else{
-          fetch(`http://localhost:3000/cadastrar/jogo`, {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json, text/plain, */*',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ 
-              nome: cmpnome.value, 
-              dificuldade: camp_dificul, 
-              dataCriacao: Date.now()
+          e.preventDefault();
+        
+          if(cmpnome.value == ""  || camp_dificul === undefined){
+            alert(`Por favor. Digite o nome do Jogo e selecione a dificuldade (*_*)`);
+          }else{
+            fetch(`http://localhost:3000/cadastrar/jogo`, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ 
+                nome: cmpnome.value, 
+                dificuldade: camp_dificul, 
+                dataCriacao: Date.now()
+              })
             })
-          })
-          .then( (data) => {  
-            console.log(data);
-            alert("Cadastro feito com sucesso");
-            cmpnome.value = "";
-          })  
-          .catch( (error) => {  
-            console.log('Request failure: ', error);  
-          });
-        }
+            .then( (data) => {  
+              console.log(data);
+              alert("Cadastro feito com sucesso");
+              cmpnome.value = "";
+            })  
+            .catch( (error) => {  
+              console.log('Request failure: ', error);  
+            });
+          }
       });
 
     </script>

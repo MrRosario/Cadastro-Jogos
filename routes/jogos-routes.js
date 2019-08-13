@@ -21,7 +21,27 @@ router.get('/feed', (req, res) => {
         res.status(500).send({ message: 'Erro no processamento', error: err });
     });
 });
-
+router.get('/feed/editar/:id', (req, res) => {
+    JogoMod.findOne({_id: req.params.id}).then((data) => {
+        res.render('pages/editar',{
+            post: data,
+            moment: moment
+        });
+    }).catch((err)=>{
+        console.log('get com error, motivo', err);
+        res.status(500).send({ message: 'Erro no processamento', error: err });
+    });
+});
+router.post('/feed/editar', (req, res)=>{
+    JogoMod.findOneAndUpdate( { _id: req.body.id }, {$set:{ dificuldade: req.body.dificuldade }},
+        {new: true }, (err, doc) => {
+            if (err) {
+                return res.send("Erro ao atualizar");
+            }
+            return res.json({data:doc, message:"atualizado com sucesso"});
+        }
+    )
+});
 router.post('/cadastrar/jogo', (req, res)=>{
     let publicacao = new JogoMod({
         nome: req.body.nome,

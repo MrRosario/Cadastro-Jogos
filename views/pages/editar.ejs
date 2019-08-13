@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <%- include('../partials/head'); %>
+<body>
+
+    <div class="conteudo">
+        <h1>Editar</h1>
+        
+            <% if(post) { %>
+                <div class="box-jogo">
+                   <div style=" display: flex; align-items: center; justify-content: start;">
+                        <img class="game-img" src="../../public/img/game.png" alt="Jogo logo">
+                        <span style="margin-left:10px; font-size: 18px;"><%= post.nome %></span>
+                   </div>
+                    <small><%= moment(post.criado_aos).format('lll') %></small>
+                    <div style="margin-top:10px; margin-bottom:10px; font-size: 16px; font-weight: 500;">
+                        <span>Nível de dificuldade:</span>
+                        <br>
+                          <select name="dificuldade" id="nivel" style="font-size: 16px;" onChange="selectionarDificuldade(this);">
+                            <option selected desabled hidden><%= post.dificuldade %></option>
+                            <option>Fácil</option>
+                            <option>Médio</option>
+                            <option>Difícil</option>
+                          </select>
+                      </div>
+                    <a class="btn-editar btn-salvar" onclick="editar('<%= post._id %>')" id="btn-salvar" href="javascript:void(0)">Salvar</a>
+                </div>
+            <% } %>
+    </div>
+
+    <script>
+        let dropdownNivel = document.getElementById("nivel");
+        let btn_salvar = document.getElementById("btn-salvar");
+        let camp_dificul  = dropdownNivel.options[dropdownNivel.selectedIndex].text;
+
+        function selectionarDificuldade(self){
+            camp_dificul = self.options[self.selectedIndex].text;
+        }   
+
+        function editar(_id){
+            fetch(`http://localhost:3000/feed/editar`, {
+                method: 'POST',
+                headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ 
+                id: _id,
+                dificuldade: camp_dificul, 
+                })
+            })
+            .then( (data) => {  
+              console.log(data);
+              alert("Nivel de dificuldade atualizado (*_*)");
+              window.location.replace("/feed");
+            })  
+            .catch( (error) => {  
+              console.log('Request failure: ', error);  
+            });
+        }
+        
+    </script>
+</body>
+</html>
