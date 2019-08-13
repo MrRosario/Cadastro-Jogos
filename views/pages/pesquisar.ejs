@@ -22,7 +22,7 @@
             if(!searchBar.value){
                 resPesquisa.innerHTML = "";
             }else{
-                fetch(`https://registrojogos.herokuapp.com/feed/pesquisar/${searchBar.value}`).then( (res) => {
+                fetch(`http://localhost:3000/feed/pesquisar/${searchBar.value}`).then( (res) => {
                     res.json().then((dados) => {
                         let str = '';
                     
