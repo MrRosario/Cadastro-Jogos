@@ -10,7 +10,7 @@
                 <div class="box-jogo">
                    <div style=" display: flex; align-items: center; justify-content: start;">
                         <img class="game-img" src="../../public/img/game.png" alt="Jogo logo">
-                        <span style="margin-left:10px; font-size: 18px;"><%= post.nome %></span>
+                        <input style="margin-left:10px; font-size: 18px; width: 100%;" id="nomeCMP" type="text" value="<%= post.nome %>">
                    </div>
                     <small><%= moment(post.criado_aos).format('lll') %></small>
                     <div style="margin-top:10px; margin-bottom:10px; font-size: 16px; font-weight: 500;">
@@ -30,7 +30,8 @@
 
     <script>
         let dropdownNivel = document.getElementById("nivel");
-        let btn_salvar = document.getElementById("btn-salvar");
+        let btn_salvar    = document.getElementById("btn-salvar");
+        let cmpnome       = document.getElementById("nomeCMP");
         let camp_dificul  = dropdownNivel.options[dropdownNivel.selectedIndex].text;
 
         function selectionarDificuldade(self){
@@ -46,6 +47,7 @@
                 },
                 body: JSON.stringify({ 
                 id: _id,
+                nome: cmpnome.value,
                 dificuldade: camp_dificul, 
                 })
             })

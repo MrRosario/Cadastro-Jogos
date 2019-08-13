@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <%- include('../partials/head'); %>
+<body>
+
+    <div class="conteudo">
+        <form id="search" accept-charset="UTF-8">
+          <input type="search" id="search-bar" placeholder="Buscar Jogo" autocomplete="off"> 
+        </form>
+        
+        <div id="res-pesquisa">
+          
+        </div>
+    </div>
+
+    <script>
+        let searchBar   = document.getElementById("search-bar");
+        let resPesquisa = document.getElementById("res-pesquisa");
+
+        searchBar.addEventListener("keyup",()=>{
+            if(!searchBar.value){
+                resPesquisa.innerHTML = "";
+            }else{
+                fetch(`http://localhost:3000/feed/pesquisar/${searchBar.value}`).then( (res) => {
+                    res.json().then((dados) => {
+                        let str = '';
+                        // console.log(dados);
+                    
+                        dados.forEach( (res, index) => {
+                           console.log(res.nome);
+                           str += `
+                            <div class="box-jogo">
+                                <div style=" display: flex; align-items: center; justify-content: start;">
+                                     <img class="game-img" src="../../public/img/game.png" alt="Jogo logo">
+                                     <span style="margin-left:10px; font-size: 18px;">${res.nome}</span>
+                                </div>
+                                 
+                                 <p style="margin: 6px 0px;">Dificuldade: <span>${res.dificuldade}</span> </p>
+                                 <a class="btn-editar" href="/feed/editar/${res._id}">Editar</a>
+                            </div>`;
+                        }); 
+                        resPesquisa.innerHTML = str;
+                    }).catch(error => {
+                        return null;
+                    });
+                });    
+            }
+        });
+
+    </script>
+</body>
+</html>

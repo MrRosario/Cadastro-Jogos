@@ -5,6 +5,7 @@
 
     <div class="conteudo">
         <h1>Lista de Jogos</h1>
+        <a href="/feed/pesquisar">Pesquisar Jogos</a>
         <% if(postsRec.length > 0) {%>
             <% postsRec.forEach(function(dados, index) { %>
                 <div class="box-jogo">
@@ -21,8 +22,5 @@
             <h3>Nenhum post encontrado por favor clique, <a href="/">Aqui</a> para cadastrar</h3>
         <% } %>
     </div>
-
-    <script>
-    </script>
 </body>
 </html>
