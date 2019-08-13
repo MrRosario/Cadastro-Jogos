@@ -1,6 +1,6 @@
 const mongoose  = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/jogos', { useNewUrlParser: true });
+mongoose.connect('mongodb://root:123senha@ds123312.mlab.com:23312/jogos', { useNewUrlParser: true });
 mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('autoIndex', false);
