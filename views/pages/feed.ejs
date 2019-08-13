@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <%- include('../partials/head'); %>
+<body>
+
+    <div class="conteudo">
+        <h1>Jogos</h1>
+        <% if(postsRec != "undefined") {%>
+            <% postsRec.forEach(function(dados, index) { %>
+                <div class="box-jogo">
+                   <div style=" display: flex; align-items: center; justify-content: start;">
+                        <img class="game-img" src="../../public/img/game.png" alt="Jogo logo">
+                        <span style="margin-left:10px; font-size: 18px;"><%= dados.nome %></span>
+                   </div>
+                    
+                    <p style="margin: 6px 0px;">Dificuldade: <span><%= dados.dificuldade %></span> </p>
+                    <p><%= moment(dados.criado_aos).format('LLL') %></p>
+                    <a class="btn-editar" href="/feed/editar">Editar</a>
+                </div>
+            <% }); %>
+        <% } else { %>  
+            <h3>Nehum Post encontrado Por favor, <a href="/">clique</a> para cadastrar </h3>
+        <% } %>
+    </div>
+
+    <script>
+    </script>
+</body>
+</html>

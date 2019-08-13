@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <%- include('../partials/head'); %>
+<body>
+
+    <div class="conteudo">
+        <h1>Registro de Video Games</h1> <span> <a href="/feed">Ver Jogos cadastrados >></a> </span>
+        <form id="formulario-jogo">
+            <h2>Cadastro</h2>
+            <label for="nome">Nome do jogo:</label>
+            <br>
+            <input type="text" name="nome" id="cmpnome" placeholder="Novo Jogo" >
+            <br>
+            <div style="margin-bottom: 15px; font-size: 16px; font-weight: 500;">
+              <span>Dificuldade do Jogo:</span>
+              <br>
+                <select name="dificuldade" style="font-size: 16px;" onChange="selectionarDificuldade(this);">
+                  <option selected desabled hidden>Selecionar:</option>
+                  <option value="Fa">Fácil</option>
+                  <option value="Md">Médio</option>
+                  <option value="Df">Difícil</option>
+                </select>
+            </div>
+
+            <input type="submit" value="Cadastar" name="cadastrar" id="btn-cadastrar" />
+        <form>
+
+    </div>
+
+    <script>
+        let btn_cadastrar  = document.getElementById("btn-cadastrar");
+        let cmpnome        = document.getElementById("cmpnome");
+        let camp_dificul;
+
+        function selectionarDificuldade(sel){
+            camp_dificul = sel.options[sel.selectedIndex].text;
+        }
+
+        btn_cadastrar.addEventListener("click", (e) => {
+        e.preventDefault();
+      
+        if(cmpnome.value == ""  || camp_dificul === undefined){
+          alert("Por favor preencha os campos");
+        }else{
+          fetch(`http://localhost:3000/cadastrar/jogo`, {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json, text/plain, */*',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 
+              nome: cmpnome.value, 
+              dificuldade: camp_dificul, 
+              dataCriacao: Date.now()
+            })
+          })
+          .then( (data) => {  
+            console.log(data);
+            alert("Cadastro feito com sucesso");
+            cmpnome.value = "";
+          })  
+          .catch( (error) => {  
+            console.log('Request failure: ', error);  
+          });
+        }
+      });
+
+    </script>
+</body>
+</html>
