@@ -1,7 +1,7 @@
 # Cadastro-Jogos
-SItema de cadastro de jogos
+Sistema de cadastro de jogos
 
-**Tecnoligias usadas**
+**Tecnologias usadas**
 <p>Nodejs</p>
 <p>Expressjs</p>
 <p>Mongodb</p>
